@@ -13,7 +13,7 @@ import pulp
 FILE = "Graaf Randwijk.xlsx"
 
 df = pd.read_excel(
-    r"\Graaf Randwijk.xlsx",
+    FILE,
     index_col=0
 )
 
