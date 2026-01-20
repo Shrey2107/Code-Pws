@@ -1,7 +1,0 @@
-pandas
-networkx
-numpy
-scipy
-matplotlib
-pulp
-openpyxl
