@@ -10,7 +10,8 @@ import pulp
 # =============================================================
 # STEP 0 — Load Excel adjacency matrix 
 # =============================================================
-FILE = "Graaf Randwijk.xlsx"
+import os
+FILE = os.path.join(os.path.dirname(__file__), "Graaf Randwijk.xlsx")
 
 df = pd.read_excel(
     FILE,
