@@ -146,14 +146,15 @@ print("Number of edges in tour:", len(tour))
 # =============================================================
 # STEP 7 — Write solution
 # =============================================================
-output_file = "CPP_solution.csv"
+output_file = os.path.join(os.path.dirname(__file__), "CPP_solution.csv")
 
 with open(output_file, mode='w', newline='') as f:
     writer = csv.writer(f)
-    writer.writerow(["Step", "From", "To", "Weight"])
+    writer.writerow(["Step", "From", "To", "Weight", "", "", "Zendmasten"])
     
     for i, (u, v, key) in enumerate(tour, start=1):
-        writer.writerow([i, u, v, G[u][v][key]["weight"]])
+        zendmasten_list = ", ".join(dominating_set) if i == 1 else ""
+        writer.writerow([i, u, v, G[u][v][key]["weight"], "", "", zendmasten_list])
 
     writer.writerow([])
     writer.writerow(["Total Cost", total_cost])
