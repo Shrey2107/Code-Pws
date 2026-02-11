@@ -54,7 +54,7 @@ def save_frame(G, highlight_nodes=None, highlight_edges=None, title="", step_inf
 # =============================================================
 # STEP 0 — LOAD GRAPH
 # =============================================================
-FILE = os.path.join(os.path.dirname(__file__), "Graaf Randwijk.xlsx")
+FILE = os.path.join(os.path.dirname(__file__), "Graaf Randwijk - Copy.xlsx")
 df = pd.read_excel(FILE, index_col=0)
 df.index = df.index.astype(str)
 df.columns = df.columns.astype(str)
@@ -681,6 +681,38 @@ if __name__ == "__main__":
     # Save as video
     imageio.mimsave(video_file, images, fps=FPS)
     print("Video saved successfully!")
+
+
+    # =========================
+    # STRUCTURED CSV EXPORT
+    # =========================
+
+    csv_file = os.path.join(folder, "cpp_results_v2.csv")
+
+    with open(csv_file, "w", newline="") as f:
+        writer = csv.writer(f)
+
+        # ---- TOUR TABLE ----
+        writer.writerow(["Step", "From", "To", "Weight"])
+        for i, (u, v, key) in enumerate(tour):
+            writer.writerow([i + 1, u, v, G[u][v][key]["weight"]])
+
+        writer.writerow([])
+
+        # ---- SUMMARY ----
+        writer.writerow(["Total Cost", total_cost])
+        writer.writerow(["Edges Traversed", len(tour)])
+
+        writer.writerow([])
+
+        # ---- MDS ----
+        writer.writerow(["Minimum Dominating Set"])
+        for node in sorted(best_mds):
+            writer.writerow([node])
+
+    print("CSV saved to:", csv_file)
+
+
 
     # 5️⃣ Quit Pygame after export
     pygame.quit()
